@@ -1,5 +1,8 @@
 package com.bruin.config;
 
+import com.bruin.serializer.FstSerializer;
+import com.bruin.serializer.KryoSerializer;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -16,12 +19,22 @@ import java.io.Serializable;
 @Configuration
 public class RedisConfig {
 
+    private FstSerializer<Object> fstSerializer;
+    private KryoSerializer<Object> kryoSerializer;
+
+    public RedisConfig(FstSerializer<Object> fstSerializer, KryoSerializer<Object> kryoSerializer) {
+        this.fstSerializer = fstSerializer;
+        this.kryoSerializer = kryoSerializer;
+    }
+
     @Bean
     public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory factory){
         RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(RedisSerializer.string());
         redisTemplate.setValueSerializer(RedisSerializer.json());
         redisTemplate.setConnectionFactory(factory);
+        redisTemplate.setDefaultSerializer(fstSerializer);
+//        redisTemplate.setDefaultSerializer(kryoSerializer);
 
         return redisTemplate;
     }
