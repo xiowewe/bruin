@@ -1,6 +1,8 @@
 package com.bruin.service.impl;
 
+import com.bruin.mapper.LogMapper;
 import com.bruin.service.LogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,10 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class LogServiceImpl implements LogService {
 
+    @Autowired
+    private LogMapper logMapper;
 
     @Override
-    public String getLog() {
+    public String getLog(Integer id) {
 
-        return null;
+        return logMapper.selectLogMsg(id);
     }
 }

@@ -2,7 +2,6 @@ package com.bruin.controller;
 
 import com.bruin.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,8 @@ public class LogController {
     private LogService logService;
 
     @RequestMapping(value = "/log", method = RequestMethod.GET)
-    public void log(){
-        logService.getLog();
+    public void log(Integer id){
+
+        logService.getLog(id);
     }
 }

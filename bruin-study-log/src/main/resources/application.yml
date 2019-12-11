@@ -1,1 +1,10 @@
+server:
+  port: 8081
 
+spring:
+  datasource:
+    druid:
+      username: root
+      password: 123456
+      url: jdbc:mysql://192.168.159.129:3306/bruin?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&MultiQueries=true
+      driver-class-name: com.mysql.cj.jdbc.Driver

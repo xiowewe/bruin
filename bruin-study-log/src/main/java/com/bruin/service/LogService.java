@@ -6,5 +6,5 @@ package com.bruin.service;
  */
 public interface LogService {
 
-    String getLog();
+    String getLog(Integer id);
 }
