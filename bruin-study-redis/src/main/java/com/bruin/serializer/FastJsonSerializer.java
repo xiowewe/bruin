@@ -4,13 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
-import org.springframework.stereotype.Component;
 
 /**
  * @description:
  * @author: xiongwenwen   2019/12/9 10:05
  */
-//@Component
 public class FastJsonSerializer<T> implements RedisSerializer<T> {
     private FastJsonConfig fastJsonConfig = new FastJsonConfig();
     private Class<T> type;

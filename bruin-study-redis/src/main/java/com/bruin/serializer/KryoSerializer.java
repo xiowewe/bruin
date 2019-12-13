@@ -10,7 +10,6 @@ import com.esotericsoftware.kryo.util.Pool;
 import de.javakaffee.kryoserializers.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
-import org.springframework.stereotype.Component;
 
 import java.awt.print.Book;
 import java.io.ByteArrayInputStream;
@@ -27,7 +26,6 @@ import java.util.regex.Pattern;
  * @description:
  * @author: xiongwenwen   2019/12/7 18:10
  */
-//@Component
 public class KryoSerializer<T> implements RedisSerializer<T> {
     private static final int BUFFER_SIZE = 2048;
     private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];

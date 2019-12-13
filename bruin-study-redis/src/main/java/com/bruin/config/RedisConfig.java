@@ -16,24 +16,12 @@ import java.io.Serializable;
 @Configuration
 public class RedisConfig {
 
-//    private FastJsonSerializer<Object> fastJsonSerializer;
-//    private FstSerializer<Object> fstSerializer;
-//    private KryoSerializer<Object> kryoSerializer;
-//
-//    public RedisConfig(FastJsonSerializer<Object> fastJsonSerializer, FstSerializer<Object> fstSerializer, KryoSerializer<Object> kryoSerializer) {
-//        this.fastJsonSerializer = fastJsonSerializer;
-//        this.fstSerializer = fstSerializer;
-//        this.kryoSerializer = kryoSerializer;
-//    }
-
     @Bean
     public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory factory){
         RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(RedisSerializer.string());
         redisTemplate.setValueSerializer(RedisSerializer.json());
         redisTemplate.setConnectionFactory(factory);
-//        redisTemplate.setDefaultSerializer(fstSerializer);
-//        redisTemplate.setDefaultSerializer(kryoSerializer);
 
         return redisTemplate;
     }
