@@ -1,7 +1,11 @@
 package com.bruin.test;
 
+import com.alibaba.fastjson.JSON;
+import com.bruin.config.PropertyReader;
 import com.bruin.utils.RedisJedisUtil;
+import com.bruin.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -11,12 +15,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class RedisTest {
 
+    @Autowired
+    private PropertyReader propertyReader;
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @Test
+    public void test1(){
+        System.out.println(JSON.toJSONString(propertyReader));
+    }
+
     @Test
     public void test(){
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                RedisJedisUtil.set(i + "", "test");
-            }
-        }
+        redisUtil.set("redis", "test");
     }
 }

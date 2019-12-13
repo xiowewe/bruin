@@ -3,11 +3,3 @@ spring:
     host: 192.168.159.129
     port: 6379
     password: 123456
-
-
-
-jedis-pool:
-  property:
-    host: 192.168.159.129
-    port: 6379
-    password: 123456

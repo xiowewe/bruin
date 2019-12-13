@@ -1,8 +1,5 @@
 package com.bruin.config;
 
-import com.bruin.serializer.FastJsonSerializer;
-import com.bruin.serializer.FstSerializer;
-import com.bruin.serializer.KryoSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -16,7 +13,7 @@ import java.io.Serializable;
  * @description:
  * @author: xiongwenwen   2019/12/7 17:27
  */
-//@Configuration
+@Configuration
 public class RedisConfig {
 
 //    private FastJsonSerializer<Object> fastJsonSerializer;
