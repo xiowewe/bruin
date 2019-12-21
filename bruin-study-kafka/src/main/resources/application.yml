@@ -1,0 +1,25 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.159.130:9092
+    producer:
+      acks: 0 #多少个分区副本收到消息，生产者确认消息写入成功  all：所有节点
+      retries: 0 #重试次数
+      batch-size: 16384 #批次内存大小
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      buffer-memory: 1024 #provider缓冲区
+      #client-id:
+      #compression-type: gzip #消息压缩格式 snappy、gzip、lz4
+
+
+    consumer:
+      group-id: test_group
+
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer #反序列化
+      value-deserializer:  org.apache.kafka.common.serialization.StringDeserializer #反序列化
+
+    listener:
+      missing-topics-fatal: false
+
+    custom:
+      partitioner: custom
