@@ -1,28 +1,31 @@
+
 spring:
   rabbitmq:
     password: guest
     username: guest
     port: 5672
-    #¿ªÆô·¢ËÍÊ§°Ü·µ»Ø
+    #å¼€å¯å‘é€å¤±è´¥è¿”å›
     publisher-returns: true
-    #¿ªÆô·¢ËÍÈ·ÈÏ
+    #å¼€å¯å‘é€ç¡®è®¤
     publisher-confirms: true
-    addresses: 192.168.159.129
+    addresses: 192.168.159.130
     listener:
       simple:
         acknowledge-mode: manual
+    virtual-host: /
 #    listener:
 #      simple:
-#        #Ö¸¶¨×îĞ¡µÄÏû·ÑÕßÊıÁ¿.
+#        #æŒ‡å®šæœ€å°çš„æ¶ˆè´¹è€…æ•°é‡.
 #        concurrency: 2
-#        #Ö¸¶¨×î´óµÄÏû·ÑÕßÊıÁ¿.
+#        #æŒ‡å®šæœ€å¤§çš„æ¶ˆè´¹è€…æ•°é‡.
 #        max-concurrency: 2
-#        #¿ªÆôack
+#        #å¼€å¯ack
 #        acknowledge-mode: auto
-#      #¿ªÆôack
+#      #å¼€å¯ack
 #      direct:
 #        acknowledge-mode: auto
-#    #Ö§³ÖÏûÏ¢µÄÈ·ÈÏÓë·µ»Ø
+#    #æ”¯æŒæ¶ˆæ¯çš„ç¡®è®¤ä¸è¿”å›
 #    template:true
 #      mandatory:
-
+server:
+  port: 8081
