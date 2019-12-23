@@ -46,6 +46,13 @@ public class ComsumerTest {
 
                     System.out.println(JSON.toJSONString(valueMap));
                 }
+
+                //手动提交偏移量
+                try {
+                    consumer.commitAsync();
+                } catch (Exception e) {
+                    logger.info("erro:{}", e.getMessage());
+                }
             }
         } finally {
             consumer.close();
