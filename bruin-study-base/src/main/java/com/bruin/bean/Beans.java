@@ -25,7 +25,8 @@ public class Beans {
     }
 
     static class StringToIntegerPropertyEditor extends PropertyEditorSupport{
-        public void setAsText(String text) throws java.lang.IllegalArgumentException {
+        @Override
+        public void setAsText(String text) throws IllegalArgumentException {
             Integer value = Integer.valueOf(text);
 
             setValue(value * value);
