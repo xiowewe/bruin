@@ -2,22 +2,22 @@ spring:
   kafka:
     bootstrap-servers: 192.168.159.130:9092
     producer:
-      acks: 0 #¶àÉÙ¸ö·ÖÇø¸±±¾ÊÕµ½ÏûÏ¢£¬Éú²úÕßÈ·ÈÏÏûÏ¢Ğ´Èë³É¹¦  all£ºËùÓĞ½Úµã
-      retries: 0 #ÖØÊÔ´ÎÊı
-      batch-size: 16384 #Åú´ÎÄÚ´æ´óĞ¡
+      acks: 0 #å¤šå°‘ä¸ªåˆ†åŒºå‰¯æœ¬æ”¶åˆ°æ¶ˆæ¯ï¼Œç”Ÿäº§è€…ç¡®è®¤æ¶ˆæ¯å†™å…¥æˆåŠŸ  allï¼šæ‰€æœ‰èŠ‚ç‚¹
+      retries: 0 #é‡è¯•æ¬¡æ•°
+      batch-size: 16384 #æ‰¹æ¬¡å†…å­˜å¤§å°
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      buffer-memory: 1024 #provider»º³åÇø
+      buffer-memory: 1024 #providerç¼“å†²åŒº
       #client-id:
-      #compression-type: gzip #ÏûÏ¢Ñ¹Ëõ¸ñÊ½ snappy¡¢gzip¡¢lz4
+      #compression-type: gzip #æ¶ˆæ¯å‹ç¼©æ ¼å¼ snappyã€gzipã€lz4
 
 
     consumer:
       group-id: test_group
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer #·´ĞòÁĞ»¯
-      value-deserializer:  org.apache.kafka.common.serialization.StringDeserializer #·´ĞòÁĞ»¯
-#      enable-auto-commit: true #×Ô¶¯Ìá½»Æ«ÒÆÁ¿
-#      auto-commit-interval: 5S #Ìá½»Ê±¼ä¼ä¸ô
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer #ååºåˆ—åŒ–
+      value-deserializer:  org.apache.kafka.common.serialization.StringDeserializer #ååºåˆ—åŒ–
+#      enable-auto-commit: true #è‡ªåŠ¨æäº¤åç§»é‡
+#      auto-commit-interval: 5S #æäº¤æ—¶é—´é—´éš”
 
 
     listener:
