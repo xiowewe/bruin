@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.bruin</groupId>
-    <artifactId>bruin-study-elasticsearch</artifactId>
+    <artifactId>bruin-study-open-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
@@ -19,32 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-            <version>7.4.2</version>
-            <!--<exclusions>
-                <exclusion>
-                    <artifactId>elasticsearch</artifactId>
-                    <groupId>org.elasticsearch</groupId>
-                </exclusion>
-            </exclusions>-->
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.62</version>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

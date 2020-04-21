@@ -8,11 +8,24 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.bruin</groupId>
     <artifactId>bruin-study</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bruin-study</name>
-    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>bruin-leetcode</module>
+        <module>bruin-study-authentication</module>
+        <module>bruin-study-base</module>
+        <module>bruin-study-cache</module>
+        <module>bruin-study-distributedid</module>
+        <module>bruin-study-elasticsearch</module>
+        <module>bruin-study-kafka</module>
+        <module>bruin-study-log</module>
+        <module>bruin-study-redis</module>
+        <module>bruin-study-open-api</module>
+        <module>bruin-study-rabbitmq</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
