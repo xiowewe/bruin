@@ -3,30 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.bruin</groupId>
+        <artifactId>bruin-study</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.bruin</groupId>
-    <artifactId>bruin-study</artifactId>
+    <artifactId>bruin-study-reactor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
-    <modules>
-        <module>bruin-leetcode</module>
-        <module>bruin-study-authentication</module>
-        <module>bruin-study-base</module>
-        <module>bruin-study-cache</module>
-        <module>bruin-study-distributedid</module>
-        <module>bruin-study-elasticsearch</module>
-        <module>bruin-study-kafka</module>
-        <module>bruin-study-log</module>
-        <module>bruin-study-redis</module>
-        <module>bruin-study-open-api</module>
-        <module>bruin-study-rabbitmq</module>
-        <module>bruin-study-reactor</module>
-    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -35,9 +19,14 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -48,6 +37,11 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
