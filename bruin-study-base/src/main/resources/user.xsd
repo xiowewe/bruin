@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:bean="http://www.springframework.org/schema/beans"
+            targetNamespace="http://www.xiowewe.test/schema/user"> <!-- 并不是有效的uri路径 -->
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans" />
+
+    <xsd:element name="application">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <extension base="bean:identifiedType">
+                    <xsd:attribute name="name" type="xsd:string" use="required" />
+                </extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+
+    <xsd:element name="service">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <extension base="bean:identifiedType">
+                    <xsd:attribute name="name" type="xsd:string" use="required" />
+                </extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
