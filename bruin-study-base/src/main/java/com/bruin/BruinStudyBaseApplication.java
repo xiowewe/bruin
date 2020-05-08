@@ -1,8 +1,7 @@
 package com.bruin;
 
-import com.bruin.expansion.spring.ApplicationConfig;
-import com.bruin.expansion.spring.ServiceBean;
-import javafx.application.Application;
+import com.bruin.expansion.spring.namespase.ApplicationConfig;
+import com.bruin.expansion.spring.namespase.ServiceBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

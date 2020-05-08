@@ -1,4 +1,4 @@
-package com.bruin.expansion.spring;
+package com.bruin.expansion.spring.namespase;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;

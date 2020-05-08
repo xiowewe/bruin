@@ -1,4 +1,4 @@
-package com.bruin.expansion.spring;
+package com.bruin.expansion.spring.namespase;
 
 import lombok.Data;
 
