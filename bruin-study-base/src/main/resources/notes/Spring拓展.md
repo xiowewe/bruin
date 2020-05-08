@@ -53,5 +53,10 @@ public BeanDefinition parseCustomElement(Element ele, BeanDefinition containingB
 
 
 
+#### BeanFactoryPostProcessor
 
+​	详见 **BeanFactoryPostProcessor.md**
 
+#### BeanPostProcessor
+
+​	详见 **BeanPostProcessor.md**

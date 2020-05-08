@@ -234,3 +234,76 @@ public class AnnotationBeanDefinitionDemo {
 
 
 ##### BeanFactoryPostProcessor的应用
+
+- ConfigurationClassPostProcessor
+
+  Spring 内部的应用，注册解析configurationClass BeanDefinition（@Component、@PropertySource、@ComponentScan、@Import、@ImportSource、@Bean等注解的类）
+
+  ```java
+  public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+  		int registryId = System.identityHashCode(registry);
+  		if (this.registriesPostProcessed.contains(registryId)) {
+  			throw new IllegalStateException(
+  					"postProcessBeanDefinitionRegistry already called on this post-processor against " + registry);
+  		}
+  		if (this.factoriesPostProcessed.contains(registryId)) {
+  			throw new IllegalStateException(
+  					"postProcessBeanFactory already called on this post-processor against " + registry);
+  		}
+  		this.registriesPostProcessed.add(registryId);
+  
+      	//通过ConfigurationClassParser解析构建配置类（@PropertySource、@ComponentScan、@Import、@ImportSource、@Bean等注解的解析），再通过ConfigurationClassBeanDefinitionReader.loadBeanDefinitions() 注册解析构建好的configurationClass BeanDefinition
+  		processConfigBeanDefinitions(registry);
+  	}
+  ```
+
+  
+
+- MapperScannerConfigurer
+
+  通过配置扫描base-package属性值，注册Mapper接口BeanDefinition到容器中
+
+  ```java
+  public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+      if (this.processPropertyPlaceHolders) {
+        processPropertyPlaceHolders();
+      }
+  
+      ClassPathMapperScanner scanner = new ClassPathMapperScanner(registry);
+      scanner.setAddToConfig(this.addToConfig);
+      scanner.setAnnotationClass(this.annotationClass);
+      scanner.setMarkerInterface(this.markerInterface);
+      scanner.setSqlSessionFactory(this.sqlSessionFactory);
+      scanner.setSqlSessionTemplate(this.sqlSessionTemplate);
+      scanner.setSqlSessionFactoryBeanName(this.sqlSessionFactoryBeanName);
+      scanner.setSqlSessionTemplateBeanName(this.sqlSessionTemplateBeanName);
+      scanner.setResourceLoader(this.applicationContext);
+      scanner.setBeanNameGenerator(this.nameGenerator);
+      scanner.registerFilters();
+      //扫描base-package属性值,注册Mapper接口BeanDefinition到容器中,具体实现源码在ClassPathBeanDefinitionScanner#doScan
+      scanner.scan(StringUtils.tokenizeToStringArray(this.basePackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS));
+    }
+  ```
+
+  
+
+- ServiceAnnotationBeanPostProcessor
+
+  dubbo项目中用于处理@Service注解的类，将Service BeanDefinition注册到容器中，实现的postProcessBeanDefinitionRegistry接口
+
+  ```java
+  public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+  
+          Set<String> resolvedPackagesToScan = resolvePackagesToScan(packagesToScan);
+  		
+      	//注册Service  BeanDefinition
+          registerServiceBeans(resolvedPackagesToScan, registry);
+  
+      }
+  ```
+
+  
+
+- PropertyPlaceholderConfigurer
+
+  ​	替换xml文件中的占位符，替换为properties文件中相对应key对应的value
