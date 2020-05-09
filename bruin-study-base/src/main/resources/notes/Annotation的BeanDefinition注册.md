@@ -12,7 +12,7 @@
     * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
     */
    public AnnotationConfigApplicationContext() {
-       //创建AnnotatedBeanDefinitionReader，默认注册6个注解处理器
+       //创建AnnotatedBeanDefinitionReader，默认注册6个处理器
    	this.reader = new AnnotatedBeanDefinitionReader(this);
    	this.scanner = new ClassPathBeanDefinitionScanner(this);
    }
