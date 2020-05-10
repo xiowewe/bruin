@@ -473,6 +473,38 @@ AbstractAutoProxyCreator抽象类有基于注解的子类AnnotationAwareAspectJA
 
 #### BeanPostProcessor 外部应用
 
+##### ConfigurationPropertiesBindingPostProcessor
+
+是一个`BeanPostProcessor`,它通常被框架添加到容器,用于解析`bean`组件上的注解`@ConfigurationProperties`，将属性源中的属性设置到`bean`组件
+
+- ConfigurationPropertiesBindingPostProcessor注入
+
+  在一个Spring Boot应用中,只要使用了注解@EnableConfigurationProperties,就会导致ConfigurationPropertiesBindingPostProcessor被添加到容器。比如在Spring Cloud应用中，自动配置PropertySourceBootstrapConfiguration就使用到了注解@EnableConfigurationProperties
+
+##### ReferenceAnnotationBeanPostProcessor
+
+Dubbo 项目中该类用来处理@Reference注解，它实现了BeanPostProcessor接口,实现postProcessPropertyValues方法可以处理每一个属性
+
+```java
+public PropertyValues postProcessPropertyValues(
+            PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeanCreationException {
+        //获取bean的@Reference元数据信息
+        InjectionMetadata metadata = findReferenceMetadata(beanName, bean.getClass(), pvs);
+        try {
+            //对Bean的属性进行自动注入
+            //最终会调用内部类ReferenceFieldElement和ReferenceMethodElement的inject方法(后面会介绍)
+            metadata.inject(bean, beanName, pvs);
+        } catch (BeanCreationException ex) {
+            throw ex;
+        } catch (Throwable ex) {
+            throw new BeanCreationException(beanName, "Injection of @Reference dependencies failed", ex);
+        }
+        return pvs;
+    }
+```
+
+
+
 
 
 
@@ -480,3 +512,5 @@ AbstractAutoProxyCreator抽象类有基于注解的子类AnnotationAwareAspectJA
 参考：https://fangjian0423.github.io/2017/06/20/spring-bean-post-processor/
 
 https://fangjian0423.github.io/2017/06/24/spring-embedded-bean-post-processor/
+
+[https://limengyu1990.github.io/blog/2018/08/07/Dubbo%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B9%8B%E9%9B%86%E6%88%90Spring-0202%E6%B3%A8%E8%A7%A3%E8%A7%A3%E6%9E%90/](https://limengyu1990.github.io/blog/2018/08/07/Dubbo源码阅读之集成Spring-0202注解解析/)
