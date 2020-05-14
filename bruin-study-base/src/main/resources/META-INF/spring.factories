@@ -1,0 +1,2 @@
+org.springframework.boot.SpringApplicationRunListener=\
+com.bruin.expansion.springboot.DemoSpringApplicationRunListenner

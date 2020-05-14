@@ -211,9 +211,60 @@ public ConfigurableApplicationContext run(String... args) {
 ##### 获取启动监听器
 
 - 获取监听器
+
+  - EventPublishingRunListener构造方法
+
+    添加所有的监听器，包括前面初始化的所有监听器 
+
+    - addApplicationListener方法
+
+      添加监听器方法，把所有添加的监听器保存在AbstractApplicationEventMulticaster 内部对象ListenerRetriever 的applicationListeners 属性中
+
+  - SpringApplicationRunListener 接口方法
+
+    不同接口在spring boot初始化过程中不同状态时执行
+
+    - 区别SpringApplicationRunListeners类和SpringApplicationRunListener方法
+    - 自定义SpringApplicationRunListener ，必须提供一个包含参数（SpringApplication application, String[] args）的构造方法
+
 - 启动监听器
 
+  - SpringApplicationRunListener#starting方法
+
+    创建ApplicationStartingEvent，并根据spring boot启动的状态触发不同的event
+
 ##### 准备环境
+
+```java
+private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners listeners,ApplicationArguments applicationArguments) {
+    //根据WebApplicationType类型创建或获取相应的ConfigurableEnviroment
+    ConfigurableEnvironment environment = getOrCreateEnvironment();
+    //配置ConfigurableEnviroment
+    configureEnvironment(environment, applicationArguments.getSourceArgs());
+    ConfigurationPropertySources.attach(environment);
+    //发布环境已准备的监听
+    listeners.environmentPrepared(environment);
+    bindToSpringApplication(environment);
+    if (!this.isCustomEnvironment) {
+        environment = new EnvironmentConverter(getClassLoader()).convertEnvironmentIfNecessary(environment,
+                                                                                               deduceEnvironmentClass());
+    }
+    ConfigurationPropertySources.attach(environment);
+    return environment;
+}
+```
+
+- 获取相应的ConfigurableEnviroment
+
+  /根据WebApplicationType类型创建或获取相应的ConfigurableEnviroment
+
+- 配置ConfigurableEnviroment
+
+  添加和设置sources or profiles配置
+
+- environmentPrepared
+
+  监听器触发environmentPrepared方法，激活触发ApplicationEnvironmentPreparedEvent类型监听器，例如**ConfigFileApplicationListener**，主要用来处理项目配置。项目中的 properties 和yml文件都是其内部类所加载。首先还是会去读spring.factories 文件，获取执行完配置的后处理类，ConfigFileApplicationListener会执行该类本身的逻辑。
 
 ##### 创建Spring容器
 
@@ -226,4 +277,6 @@ public ConfigurableApplicationContext run(String... args) {
 ##### 结束监听器
 
 ##### 执行Runners
+
+https://juejin.im/post/5c2af8915188252a94130422
 
