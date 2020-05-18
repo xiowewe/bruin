@@ -265,18 +265,62 @@ private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners
 - environmentPrepared
 
   监听器触发environmentPrepared方法，激活触发ApplicationEnvironmentPreparedEvent类型监听器，例如**ConfigFileApplicationListener**，主要用来处理项目配置。项目中的 properties 和yml文件都是其内部类所加载。首先还是会去读spring.factories 文件，获取执行完配置的后处理类，ConfigFileApplicationListener会执行该类本身的逻辑。
+  
+  
+  
+  关于Springboot的Listener参考https://juejin.im/post/5c2af8915188252a94130422
 
 ##### 创建Spring容器
 
+​	根据 WebApplicationType类型获取对应的ConfiguarableApplicationContext
+
 ##### Spring容器前置处理
 
+```java
+private void prepareContext(ConfigurableApplicationContext context, ConfigurableEnvironment environment,
+			SpringApplicationRunListeners listeners, ApplicationArguments applicationArguments, Banner printedBanner) {
+    
+    //设置容器环境
+    context.setEnvironment(environment);
+    //执行容器后置处理器
+    postProcessApplicationContext(context);
+    //执行容器中的ApplicationContextInitializer 包括
+    applyInitializers(context);
+    //发送容器已经准备的事件，通知监听器
+    listeners.contextPrepared(context);
+    if (this.logStartupInfo) {
+        logStartupInfo(context.getParent() == null);
+        logStartupProfileInfo(context);
+    }
+    // 注册启动参数bean，这里将容器指定的参数封装成bean，注入容器
+    ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
+    beanFactory.registerSingleton("springApplicationArguments", applicationArguments);
+    if (printedBanner != null) {
+        beanFactory.registerSingleton("springBootBanner", printedBanner);
+    }
+    if (beanFactory instanceof DefaultListableBeanFactory) {
+        ((DefaultListableBeanFactory) beanFactory)
+        .setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
+    }
+    if (this.lazyInitialization) {
+        context.addBeanFactoryPostProcessor(new LazyInitializationBeanFactoryPostProcessor());
+    }
+    //加载启动类，注入容器
+    Set<Object> sources = getAllSources();
+    Assert.notEmpty(sources, "Sources must not be empty");
+    load(context, sources.toArray(new Object[0]));
+    //发布容器已加载事件
+    listeners.contextLoaded(context);
+}
+```
+
 ##### 容器刷新
+
+详见refresh方法
 
 ##### Spring容器后置处理
 
 ##### 结束监听器
 
 ##### 执行Runners
-
-https://juejin.im/post/5c2af8915188252a94130422
 
