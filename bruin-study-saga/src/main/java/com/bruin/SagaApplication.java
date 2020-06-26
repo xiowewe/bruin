@@ -8,5 +8,4 @@ public class SagaApplication {
     public static void main(String[] args) {
         SpringApplication.run(SagaApplication.class, args);
     }
-
 }
