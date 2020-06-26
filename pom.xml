@@ -26,6 +26,7 @@
         <module>bruin-study-open-api</module>
         <module>bruin-study-rabbitmq</module>
         <module>bruin-study-reactor</module>
+        <module>bruin-study-saga</module>
     </modules>
 
     <properties>
