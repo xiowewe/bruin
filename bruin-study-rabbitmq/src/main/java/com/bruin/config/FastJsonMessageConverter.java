@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 
-@Component
+//@Component
 public class FastJsonMessageConverter extends AbstractMessageConverter {
     private static Logger LOGGER = LoggerFactory.getLogger(FastJsonMessageConverter.class);
 
@@ -30,6 +30,7 @@ public class FastJsonMessageConverter extends AbstractMessageConverter {
     @Override
     public Object fromMessage(Message message) throws MessageConversionException {
         try {
+            LOGGER.debug("FastJsonMessageConverter.fromMessage");
             return new String(message.getBody(), defaultCharset);
         } catch (UnsupportedEncodingException e) {
             LOGGER.error("FastJsonMessageConverter.fromMessage occur error",e);

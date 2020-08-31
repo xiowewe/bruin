@@ -8,7 +8,7 @@ spring:
     publisher-returns: true
     #开启发送确认
     publisher-confirms: true
-    addresses: 192.168.159.130
+    addresses: 127.0.0.1
     listener:
       simple:
         acknowledge-mode: manual

@@ -7,6 +7,7 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -33,8 +34,8 @@ public class RabbitmqProvider implements ApplicationContextAware {
     private static RabbitAdmin rabbitAdmin;
     private static Exchange delayExchange;
 
-    @Autowired
-    private FastJsonMessageConverter fastJsonMessageConverter;
+//    @Autowired
+//    private FastJsonMessageConverter fastJsonMessageConverter;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -44,7 +45,7 @@ public class RabbitmqProvider implements ApplicationContextAware {
     @PostConstruct
     private void init(){
         rabbitTemplate = applicationContext.getBean(RabbitTemplate.class);
-        rabbitTemplate.setMessageConverter(fastJsonMessageConverter);
+//        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
 
         rabbitAdmin = new RabbitAdmin(rabbitTemplate);
 //        delayExchange = (Exchange) applicationContext.getBean(RabbitmqConfig.DELAY_EXCHANGE_NAME);
