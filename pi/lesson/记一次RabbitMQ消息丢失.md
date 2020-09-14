@@ -29,8 +29,16 @@
 
    
 
-   
+   消息自动ACK失效问题
 
-   
+   当序列化为JSON时，此配置会失效
 
+   https://www.cnblogs.com/sw008/p/11054293.html
+   
+   
+   
+   
+   
+   
+   
    
