@@ -452,3 +452,10 @@ updateInstanceRemoteStatus方法中，从Eureka server中取得的服务列表�
 
 ##### 服务续约
 
+官方文档https://github.com/Netflix/eureka/wiki/Understanding-eureka-client-server-communication#renew
+
+1. Eureka client每隔三十秒发送一次心跳到Eureka server，这就是续约；
+2. Eureka client续约的目的是告诉Eureka server自己还活着；
+3. Eureka server若90秒内未收到心跳，就从自己的服务列表中剔除该Eureka client；
+4. 建议不要改变心跳间隔，因为Eureka server是通过心跳来判断Eureka client是否正常；
+
