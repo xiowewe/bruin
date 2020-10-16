@@ -459,3 +459,30 @@ updateInstanceRemoteStatus方法中，从Eureka server中取得的服务列表�
 3. Eureka server若90秒内未收到心跳，就从自己的服务列表中剔除该Eureka client；
 4. 建议不要改变心跳间隔，因为Eureka server是通过心跳来判断Eureka client是否正常；
 
+```java
+boolean renew() {
+    EurekaHttpResponse<InstanceInfo> httpResponse;
+    try {
+    		//发Restful请求，即心跳
+        httpResponse = eurekaTransport.registrationClient.sendHeartBeat(instanceInfo.getAppName(), instanceInfo.getId(), instanceInfo, null);
+        logger.debug(PREFIX + "{} - Heartbeat status: {}", appPathIdentifier, httpResponse.getStatusCode());
+      //404错误会触发注册逻辑
+        if (httpResponse.getStatusCode() == 404) {
+            REREGISTER_COUNTER.increment();
+            logger.info(PREFIX + "{} - Re-registering apps/{}", appPathIdentifier, instanceInfo.getAppName());
+            long timestamp = instanceInfo.setIsDirtyWithTime();
+            boolean success = register();
+            if (success) {
+                instanceInfo.unsetIsDirty(timestamp);
+            }
+            return success;
+        }
+      //返回码200表示心跳成功
+        return httpResponse.getStatusCode() == 200;
+    } catch (Throwable e) {
+        logger.error(PREFIX + "{} - was unable to send heartbeat!", appPathIdentifier, e);
+        return false;
+    }
+}
+```
+
