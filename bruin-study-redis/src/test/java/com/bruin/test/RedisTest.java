@@ -2,6 +2,8 @@ package com.bruin.test;
 
 import com.alibaba.fastjson.JSON;
 import com.bruin.config.PropertyReader;
+import com.bruin.lessons.AggregateStatistics;
+import com.bruin.lessons.OrderStatistics;
 import com.bruin.utils.RedisJedisUtil;
 import com.bruin.utils.RedisUtil;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,10 @@ public class RedisTest {
     private PropertyReader propertyReader;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private AggregateStatistics aggregateStatistics;
+    @Autowired
+    private OrderStatistics orderStatistics;
 
     @Test
     public void test1(){
@@ -27,6 +33,6 @@ public class RedisTest {
 
     @Test
     public void test(){
-        redisUtil.set("redis", "test");
+        orderStatistics.orderStatisticsBySortedSet();
     }
 }
