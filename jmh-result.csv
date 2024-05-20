@@ -1,0 +1,7 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
+"com.bruin.jmh.ObjectMapperTest.globalTest","thrpt",4,5,0.000110,0.000002,"ops/ns"
+"com.bruin.jmh.ObjectMapperTest.globalThreadLocalTest","thrpt",4,5,0.000074,0.000115,"ops/ns"
+"com.bruin.jmh.ObjectMapperTest.localTest","thrpt",4,5,0.000029,0.000003,"ops/ns"
+"com.bruin.jmh.ObjectMapperTest.globalTest","avgt",4,5,86013.032090,153676.999327,"ns/op"
+"com.bruin.jmh.ObjectMapperTest.globalThreadLocalTest","avgt",4,5,32489.227269,4675.749968,"ns/op"
+"com.bruin.jmh.ObjectMapperTest.localTest","avgt",4,5,126921.561759,2942.160872,"ns/op"

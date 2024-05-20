@@ -1,8 +1,8 @@
 
 spring:
   rabbitmq:
-    password: guest
-    username: guest
+    password: admin
+    username: admin
     port: 5672
     #开启发送失败返回
     publisher-returns: true
@@ -12,7 +12,7 @@ spring:
     listener:
       simple:
         acknowledge-mode: manual
-    virtual-host: /
+    virtual-host: default_vhost
 #    listener:
 #      simple:
 #        #指定最小的消费者数量.
